@@ -9,16 +9,16 @@ To view a copy of this license, visit <http://opensource.org/licenses/MIT/>.
 '''
 from twython import Twython
 
-from auth import consumer_key, consumer_secret, access_token, \
-    access_token_secret
+from auth import CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, \
+    ACCESS_TOKEN_SECRET
 
 
 def tweet(tweets):
     '''Tweet.'''
     response = []
 
-    twitter = Twython(consumer_key, consumer_secret, access_token,
-                      access_token_secret)
+    twitter = Twython(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN,
+                      ACCESS_TOKEN_SECRET)
 
     for status in tweets:
         response.append(twitter.update_status(status=status))
