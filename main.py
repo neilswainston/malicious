@@ -15,7 +15,7 @@ import uuid
 from flask import Flask, jsonify
 
 from tweet_factory import get_tweets
-from tweeter import tweet
+from tweeter import Tweeter
 
 
 # Configuration:
@@ -36,7 +36,7 @@ def test(num):
 def publish(num):
     '''Publish.'''
     tweets = get_tweets(int(num))
-    return tweet(tweets)
+    return Tweeter().tweet(tweets)
 
 
 @app.errorhandler(Exception)
