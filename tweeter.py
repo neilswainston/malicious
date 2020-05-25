@@ -23,6 +23,3 @@ def tweet(tweets):
         response.append(twitter.update_status(status=status))
 
     return response
-
-
-tweet(['test'])
