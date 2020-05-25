@@ -1,0 +1,6 @@
+cron:
+- description: "Publish"
+  url: /publish/20
+  schedule: every 60 mins
+  retry_parameters:
+    min_backoff_seconds: 30
