@@ -8,14 +8,16 @@ To view a copy of this license, visit <http://opensource.org/licenses/MIT/>.
 @author:  neilswainston
 '''
 # pylint: disable=invalid-name
+import os.path
 import sys
 import traceback
 import uuid
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, send_from_directory
 
 from tweet_factory import get_tweets
 import tweeter
+
 
 # Configuration:
 DEBUG = False
@@ -23,6 +25,14 @@ SECRET_KEY = str(uuid.uuid4())
 
 app = Flask(__name__)
 app.config.from_object(__name__)
+
+
+@app.route('/favicon.ico')
+def favicon():
+    '''Get favicon.'''
+    return send_from_directory(
+        os.path.join(app.root_path, 'static'),
+        'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 
 @app.route('/test/<num>')
@@ -35,7 +45,7 @@ def test(num):
 def publish(num):
     '''Publish.'''
     tweets = get_tweets(int(num))
-    return tweeter.tweet(tweets)
+    return jsonify(tweeter.tweet(tweets))
 
 
 @app.errorhandler(Exception)
