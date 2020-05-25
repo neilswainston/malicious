@@ -7,26 +7,22 @@ To view a copy of this license, visit <http://opensource.org/licenses/MIT/>.
 
 @author:  neilswainston
 '''
-# pylint: disable=too-few-public-methods
 import twython
 
-from auth import APP_KEY, APP_SECRET
+from auth import APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET
 
 
-class Tweeter():
-    '''Class to submit tweets to Twitter.'''
+def tweet(tweets):
+    '''Tweet.'''
+    response = []
 
-    def __init__(self):
-        self.__twython = twython.Twython(APP_KEY, APP_SECRET, oauth_version=2)
-        self.__access_token = self.__twython.obtain_access_token()
+    twitter = twython.Twython(APP_KEY, APP_SECRET, OAUTH_TOKEN,
+                              OAUTH_TOKEN_SECRET)
 
-    def tweet(self, tweets):
-        '''Tweet.'''
-        response = []
+    for status in tweets:
+        response.append(twitter.update_status(status=status))
 
-        twitter = twython.Twython(APP_KEY, access_token=self.__access_token)
+    return response
 
-        for status in tweets:
-            response.append(twitter.update_status(status=status))
 
-        return response
+tweet(['test'])
