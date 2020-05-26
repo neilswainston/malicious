@@ -1,6 +1,6 @@
 cron:
 - description: "Publish"
-  url: /publish/20
-  schedule: every 60 mins
+  url: /publish/1
+  schedule: every 10 mins synchronized
   retry_parameters:
     min_backoff_seconds: 30
