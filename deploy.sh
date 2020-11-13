@@ -1,2 +1,2 @@
-gcloud app deploy
-gcloud app deploy cron.yaml
+gcloud app deploy --project=$1
+gcloud app deploy --project=$1 cron.yaml

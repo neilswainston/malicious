@@ -1,7 +1,7 @@
 '''
 Daily Mailicious (c) Neil Swainston 2020
 
-CodonGenie is licensed under the MIT License.
+Daily Mailicious is licensed under the MIT License.
 
 To view a copy of this license, visit <http://opensource.org/licenses/MIT/>.
 
@@ -38,13 +38,15 @@ def favicon():
 @app.route('/test/<num>')
 def test(num):
     '''Test.'''
-    return jsonify(get_tweets(int(num)))
+    hashtags = tweeter.get_hashtags()
+    return jsonify(get_tweets(int(num), hashtags))
 
 
 @app.route('/publish/<num>')
 def publish(num):
     '''Publish.'''
-    tweets = get_tweets(int(num))
+    hashtags = tweeter.get_hashtags()
+    tweets = get_tweets(int(num), hashtags)
     return jsonify(tweeter.tweet(tweets))
 
 
